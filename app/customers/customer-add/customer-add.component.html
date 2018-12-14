@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    Dodaj klienta
+  </div>
+  <div class="card-body">
+    <form #customerForm="ngForm" (ngSubmit)="add(customerForm)">
+      <div class="form-group">
+        <label for="name">Imie</label>
+        <input required type="text" minlength="5" maxlength="20" class="form-control" name="name" id="name" [(ngModel)]="name" #nameInput #nameModel="ngModel" />
+        <div class="alert alert-danger" *ngIf="nameModel.invalid && (nameModel.touched || nameModel.dirty)">
+          Pole jest wymagane!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="age">Wiek</label>
+        <input required type="text" class="form-control" name="age" id="age" [(ngModel)]="age" #ageInput #ageModel="ngModel"/>
+        <div class="alert alert-danger" *ngIf="ageModel.invalid && ageModel.touched">
+          Pole jest wymagane!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="type">Typ</label>
+        <select required class="form-control" name="type" id="type" [(ngModel)]="type">
+          <option [value]="CustomerType.Standard">Standard</option>
+          <option [value]="CustomerType.Premium">Premium</option>
+          <option [value]="CustomerType.VIP">VIP</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-primary" [disabled]="!customerForm.dirty" (click)="customerForm.resetForm()">Resetuj</button>
+      <button type="submit" class="btn btn-success" [disabled]="!customerForm.form.valid">Dodaj</button>
+    </form>
+  </div>
+</div>

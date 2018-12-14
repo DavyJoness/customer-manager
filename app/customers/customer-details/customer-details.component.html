@@ -1,0 +1,31 @@
+<div class="card-body">
+  <div class="row">
+    <div class="col-sm-8">
+      <p>Opis: {{customer.description}}</p>
+      <p appHighlight>Wiek: {{customer.age}}</p>
+      <p>Adres: {{customer.address.street}} {{customer.address.houseNumber}}, {{customer.address.city}}</p>
+      <ul>
+        <li *ngFor="let category of customer.categories; let oddItem = odd" [class.oddElement]="oddItem">{{category | capitalize}}</li>
+      </ul>
+      <input type="text" [(ngModel)]="customer.name" [ngModelOptions]="{ updateOn: 'blur' }" />
+      <button type="button" class="btn btn-primary" (click)="changeCustomer()">Przełącz klienta</button>
+      <br/>
+
+    </div>
+    <div class="col-sm-4">
+      <div *ngIf="showPhoto; then photo else noPhoto">
+
+      </div>
+
+      <ng-template #photo>
+        <img [src]="customer.photoUrl" />
+        <br/>
+      </ng-template>
+
+      <ng-template #noPhoto>
+        <p>Zdjęcie ukryte</p>
+      </ng-template>
+      <label><input type="checkbox" [(ngModel)]="showPhoto" />Pokaż foto</label>
+    </div>
+  </div>
+</div>

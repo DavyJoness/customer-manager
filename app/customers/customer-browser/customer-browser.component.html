@@ -1,0 +1,28 @@
+<select [(ngModel)]="customer" *ngIf="customers$ | async as customers else loading">
+  <option *ngFor="let c of customers" [ngValue]="c">{{c.name}}</option>
+  <option [ngValue]="null">Brak klienta</option>
+</select>
+<button class="btn btn-primary" (click)="showPrompt()">Poka prompt</button>
+<button class="btn btn-primary" (click)="deleteCustomer()">Usuń klienta</button>
+
+<div class="card" *ngIf="customer else notChosen">
+  <div class="card-header">
+    <h1 [style.color]="nameColor" [class.isActive]="isActive">{{customer.name}}
+      <ng-container [ngSwitch]="customer.type">
+        <ng-container *ngSwitchCase="CustomerType.Standard">*</ng-container>
+        <ng-container *ngSwitchCase="CustomerType.Premium">**</ng-container>
+        <ng-container *ngSwitchCase="CustomerType.VIP">***</ng-container>
+      </ng-container>
+    </h1>
+  </div>
+  <cus-customer-details #childerson [customer]="customer" (index)="onEmit($event)"></cus-customer-details>
+  
+</div>
+
+<ng-template #notChosen>
+  <p>Nie wybrano klienta!</p>
+</ng-template>
+
+<ng-template #loading>
+  <p>Laden Sie bitte...</p>
+</ng-template>

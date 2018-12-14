@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> <!-- jesli zakladka jest aktywna to wskazuje na tą klasę -->
+        <a class="nav-link" routerLink = "customers">Klienci</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink = "customers/add">Dodaj klienta</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink = "contracts">Umowy</a>
+      </li>
+    </ul>
+    <form class="navbar-form navbar-right">
+      <button type="button" class="btn btn-default" *ngIf="!authService.isLogged" (click)="authService.login()">Zaloguj</button>
+      <button type="button" class="btn btn-default" *ngIf="authService.isLogged" (click)="authService.logout()">Wyloguj</button>
+    </form>
+  </div>
+</nav>
